@@ -217,6 +217,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    table_print (1.5.7)
     thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -256,6 +257,7 @@ DEPENDENCIES
   rails-erd
   rubocop-rails
   spring
+  table_print
   tzinfo-data
 
 RUBY VERSION

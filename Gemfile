@@ -37,6 +37,7 @@ group :development, :test do
   gem 'letter_opener'
   gem 'pry'
   gem 'rails-erd'
+  gem 'table_print'
 end
 
 group :development do

@@ -1,4 +1,4 @@
-class Users::SessionsController < Devise::SessionsController
+class SessionsController < Devise::SessionsController
   respond_to :json
 
   private
@@ -14,7 +14,7 @@ class Users::SessionsController < Devise::SessionsController
     if current_user
       render json: {
         status: 200,
-        message: 'logged out successfully'
+        message: 'Logged out successfully'
       }, status: :ok
     else
       render json: {

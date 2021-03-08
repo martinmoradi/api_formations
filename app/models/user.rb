@@ -13,7 +13,7 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: self
 
   has_many :session_attendees, class_name: 'student', foreign_key: 'student_id', dependent: :nullify
-  has_many :sessions, through: :session_attendees, foreign_key: 'student_id'
+  has_many :sessions, through: :session_attendees, foreign_key: 'student_id', dependent: :nullify
   has_many :courses, class_name: 'teacher', foreign_key: 'teacher_id', dependent: :nullify
 
   validates :email,
@@ -21,7 +21,6 @@ class User < ApplicationRecord
             uniqueness: true,
             format: { with: URI::MailTo::EMAIL_REGEXP, message: "L'adresse email n'est pas correcte." }
 
-  validates :is_validated, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :role, presence: true
