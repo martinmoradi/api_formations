@@ -84,3 +84,9 @@ production:
   database: api_formations_production
   username: api_formations
   password: <%= ENV['API_FORMATIONS_DATABASE_PASSWORD'] %>
+
+staging:
+  <<: *default
+  database: api_formations_production
+  username: api_formations
+  password: <%= ENV['API_FORMATIONS_DATABASE_PASSWORD'] %>
