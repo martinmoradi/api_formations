@@ -1,7 +1,60 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'faker'
+
+100.times do
+  User.create!(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password: Faker::Internet.password,
+    role: %w[student teacher admin].sample,
+    is_validated: true
+  )
+end
+puts 'Users created'
+
+50.times do
+  Course.create!(
+    title: Faker::Company.industry,
+    teacher_id: User.teachers.sample.id
+  )
+end
+puts 'Courses created'
+
+30.times do
+  Category.create!(
+    title: Faker::Company.profession
+  )
+end
+puts 'Categories created'
+
+Course.all.each do |item|
+  CourseCategoryAssignment.create!(
+    course_id: item.id,
+    category_id: Category.all.sample.id
+  )
+end
+puts 'Categories Assigments created'
+
+20.times { Classroom.create! }
+puts 'Classrooms created'
+
+50.times do
+  Session.create!(
+    date: Faker::Date.in_date_period,
+    classroom_id: Classroom.all.sample.id,
+    course_id: Course.all.sample.id
+  )
+end
+puts 'Sessions created'
+
+Session.all.each do |item|
+  attendees_number = rand(20)
+  attendees_number.times do
+    SessionAttendee.create!(
+      assessment: rand(20),
+      student_id: User.students.sample.id,
+      session_id: item.id
+    )
+  end
+end
+puts 'Session attendees created'
