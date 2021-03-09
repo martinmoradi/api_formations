@@ -39,7 +39,7 @@ puts 'Categories Assigments created'
 puts 'Classrooms created'
 
 50.times do
-  Session.create!(
+  CourseSession.create!(
     date: Faker::Date.in_date_period,
     classroom_id: Classroom.all.sample.id,
     course_id: Course.all.sample.id
@@ -47,13 +47,13 @@ puts 'Classrooms created'
 end
 puts 'Sessions created'
 
-Session.all.each do |item|
+CourseSession.all.each do |item|
   attendees_number = rand(20)
   attendees_number.times do
     SessionAttendee.create!(
       assessment: rand(20),
       student_id: User.students.sample.id,
-      session_id: item.id
+      course_session_id: item.id
     )
   end
 end

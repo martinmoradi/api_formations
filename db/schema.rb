@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(version: 2021_03_08_145812) do
     t.index ["course_id"], name: "index_course_category_assignments_on_course_id"
   end
 
+  create_table "course_sessions", force: :cascade do |t|
+    t.date "date", null: false
+    t.bigint "classroom_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["classroom_id"], name: "index_course_sessions_on_classroom_id"
+    t.index ["course_id"], name: "index_course_sessions_on_course_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title", null: false
     t.bigint "teacher_id", null: false
@@ -46,21 +56,11 @@ ActiveRecord::Schema.define(version: 2021_03_08_145812) do
   create_table "session_attendees", force: :cascade do |t|
     t.float "assessment"
     t.bigint "student_id", null: false
-    t.bigint "session_id", null: false
+    t.bigint "course_session_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["session_id"], name: "index_session_attendees_on_session_id"
+    t.index ["course_session_id"], name: "index_session_attendees_on_course_session_id"
     t.index ["student_id"], name: "index_session_attendees_on_student_id"
-  end
-
-  create_table "sessions", force: :cascade do |t|
-    t.date "date", null: false
-    t.bigint "classroom_id", null: false
-    t.bigint "course_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["classroom_id"], name: "index_sessions_on_classroom_id"
-    t.index ["course_id"], name: "index_sessions_on_course_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -83,9 +83,9 @@ ActiveRecord::Schema.define(version: 2021_03_08_145812) do
 
   add_foreign_key "course_category_assignments", "categories"
   add_foreign_key "course_category_assignments", "courses"
+  add_foreign_key "course_sessions", "classrooms"
+  add_foreign_key "course_sessions", "courses"
   add_foreign_key "courses", "users", column: "teacher_id"
-  add_foreign_key "session_attendees", "sessions"
+  add_foreign_key "session_attendees", "course_sessions"
   add_foreign_key "session_attendees", "users", column: "student_id"
-  add_foreign_key "sessions", "classrooms"
-  add_foreign_key "sessions", "courses"
 end

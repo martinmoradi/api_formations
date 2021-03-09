@@ -3,8 +3,8 @@
 #   t.bigint "session_id", null: false
 class SessionAttendee < ApplicationRecord
   belongs_to :student, class_name: 'User', foreign_key: 'student_id'
-  belongs_to :session
+  belongs_to :course_session
 
   validates :assessment, numericality: true
-  validates :student_id, :session_id, presence: true
+  validates :student_id, :course_session_id, presence: true
 end
