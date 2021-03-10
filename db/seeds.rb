@@ -35,7 +35,11 @@ Course.all.each do |item|
 end
 puts 'Categories Assigments created'
 
-20.times { Classroom.create! }
+20.times do
+  Classroom.create!(
+    room_location: Faker::Alphanumeric.alphanumeric(number: 2)
+  )
+end
 puts 'Classrooms created'
 
 50.times do

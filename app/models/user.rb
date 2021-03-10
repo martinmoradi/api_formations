@@ -36,4 +36,8 @@ class User < ApplicationRecord
   def self.admins
     User.all.select { |user| user.role == 'admin' }
   end
+
+  def self.to_validate
+    User.all.select { |user| user.is_validated == false }
+  end
 end

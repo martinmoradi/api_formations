@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2021_03_08_145812) do
   end
 
   create_table "classrooms", force: :cascade do |t|
+    t.string "room_location", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
