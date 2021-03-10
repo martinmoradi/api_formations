@@ -4,7 +4,7 @@ class Api::V1::SessionAttendeesController < Api::BaseController
 
   def index
     @session_attendees = SessionAttendee.all
-    render json: CourseSessionSerializer.new(@session_attendees)
+    render json: SessionAttendeeSerializer.new(@session_attendees)
   end
 
   def show

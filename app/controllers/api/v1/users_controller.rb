@@ -1,9 +1,16 @@
-class Api::UsersController < Api::BaseController
+class Api::V1::UsersController < Api::BaseController
   before_action :set_user, only: %i[show update destroy]
+  before_action :authenticate_user!
+  before_action :admin?, except: %i[show]
 
   def index
     @users = User.all
     render json: @users
+  end
+
+  def to_validate
+    @users = User.to_validate
+    render json: UserSerializer.new(@users)
   end
 
   def show
