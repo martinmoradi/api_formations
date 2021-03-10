@@ -26,7 +26,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'devise'
 gem 'devise-jwt'
 gem 'faker'
-gem 'fast_jsonapi'
+gem 'jsonapi-serializer'
 gem 'rack-cors'
 
 group :development, :test do

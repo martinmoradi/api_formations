@@ -101,13 +101,13 @@ GEM
     erubi (1.10.0)
     faker (2.16.0)
       i18n (>= 1.6, < 2)
-    fast_jsonapi (1.5)
-      activesupport (>= 4.2)
     ffi (1.15.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
+    jsonapi-serializer (2.1.0)
+      activesupport (>= 4.2)
     jwt (2.2.2)
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -246,7 +246,7 @@ DEPENDENCIES
   devise
   devise-jwt
   faker
-  fast_jsonapi
+  jsonapi-serializer
   letter_opener
   listen (~> 3.3)
   pg (~> 1.1)
