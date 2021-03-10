@@ -28,6 +28,7 @@ gem 'devise-jwt'
 gem 'faker'
 gem 'jsonapi-serializer'
 gem 'rack-cors'
+gem 'jsonapi-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

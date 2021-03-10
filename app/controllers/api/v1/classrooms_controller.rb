@@ -5,7 +5,7 @@ class Api::V1::ClassroomsController < Api::BaseController
 
   def index
     @classrooms = Classroom.all
-    render json: @classrooms
+    render json: ClassroomSerializer.new(@classrooms)
   end
 
   def show
