@@ -56,7 +56,7 @@ puts 'Categories Assigments successfully created'
 end
 puts 'Classrooms successfully created'
 
-20.times do
+10.times do
   CourseSession.create!(
     date: Faker::Date.in_date_period,
     classroom_id: Classroom.all.sample.id,
