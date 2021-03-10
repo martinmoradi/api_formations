@@ -3,7 +3,9 @@
 #   t.bigint "course_id", null: false
 class CourseSession < ApplicationRecord
   belongs_to :course
-  has_many :classrooms
+  belongs_to :classroom
+  has_many :session_attendees
+  has_many :students, through: :session_attendees
 
-  validates :date, :classroom_id, :course_id, presence: true
+  validates :date, presence: true
 end

@@ -1,28 +1,14 @@
 Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
-    
-    namespace :public do
-      resource :courses, only: %i[show index]
-    end
-
-    namespace :students do
-      resources :courses, only: %i[show index]
-      resources :users, only: [:show]
-      resources :session_attendees
-    end
-
-    namespace :teachers do
-      resources :session_attendees, only: %i[show index update]
-      resources :courses, only: %i[show index]
-    end
-
-    namespace :admins do
-      resources :categories
-      resources :course_sessions
-      resources :users
-      resources :session_attendees
-      resources :courses
+    namespace :v1 do
+      get '/users_validation', to: 'users#to_validate'
       resources :classrooms
+      resources :categories
+      resources :courses do
+        resources :course_sessions do
+          resources :session_attendees
+        end
+      end
     end
   end
 

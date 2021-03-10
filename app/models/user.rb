@@ -12,9 +12,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
-  has_many :session_attendees, class_name: 'student', foreign_key: 'student_id', dependent: :nullify
-  has_many :sessions, through: :session_attendees, foreign_key: 'student_id', dependent: :nullify
-  has_many :courses, class_name: 'teacher', foreign_key: 'teacher_id', dependent: :nullify
+  # has_many :session_attendees, class_name: 'student', foreign_key: 'student_id', dependent: :nullify
+  # has_many :sessions, through: :session_attendees, foreign_key: 'student_id', dependent: :nullify
+  # has_many :courses, class_name: 'teacher', foreign_key: 'teacher_id', dependent: :nullify
+  has_many :session_attendees
+  has_many :course_sessions, through: :session_attendees
 
   validates :email,
             presence: true,
@@ -25,19 +27,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :role, presence: true
 
-  def self.students
-    User.all.select { |user| user.role == 'student' }
-  end
-
-  def self.teachers
-    User.all.select { |user| user.role == 'teacher' }
-  end
-
-  def self.admins
-    User.all.select { |user| user.role == 'admin' }
-  end
-
-  def self.to_validate
-    User.all.select { |user| user.is_validated == false }
-  end
+  scope :students, -> { where(role: 'student') }
+  scope :admins, -> { where(role: 'admin') }
+  scope :teachers, -> { where(role: 'teacher') }
+  scope :to_validate, -> { where(is_validated: false) }
 end
