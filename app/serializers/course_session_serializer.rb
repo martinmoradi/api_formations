@@ -1,5 +1,4 @@
 class CourseSessionSerializer
   include JSONAPI::Serializer
-  attributes :date, :course, :students
-  has_one :classroom
+  attributes :date, :remaining_seats, :students, :classroom
 end

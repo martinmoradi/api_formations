@@ -1,17 +1,23 @@
 #   t.float "assessment"
 #   t.bigint "student_id", null: false
-#   t.bigint "session_id", null: false
+#   t.bigint "course_session_id", null: false
 class SessionAttendee < ApplicationRecord
   belongs_to :student, class_name: 'User', foreign_key: 'student_id'
   belongs_to :course_session
-
+  # , :already_registered?
   before_create :remaining_seats?, :already_registered?
   after_create :register_to_session
   validates :assessment, numericality: true, on: :update
 
   def already_registered?
-    SessionAttendee.where(student_id: User.find(student_id)).each do |session_attendee|
-      throw :abort if session_attendee.course_session.date == course_session.date
+    SessionAttendee.where(student_id: User.find(student_id)).each do |session|
+      next unless session.course_session.date == course_session.date
+
+      puts "#{session.course_session.date} is equal to #{course_session.date}"
+      puts '--------------------------------'
+      puts session.student_id
+      puts student_id
+      throw :abort
     end
   end
 

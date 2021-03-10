@@ -1,6 +1,6 @@
 require 'faker'
 
-100.times do
+1000.times do
   User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
@@ -12,7 +12,7 @@ require 'faker'
 end
 puts 'Users created'
 
-50.times do
+15.times do
   Course.create!(
     title: Faker::Company.industry,
     teacher_id: User.teachers.sample.id
@@ -20,7 +20,7 @@ puts 'Users created'
 end
 puts 'Courses created'
 
-30.times do
+10.times do
   Category.create!(
     title: Faker::Company.profession
   )
@@ -42,7 +42,7 @@ puts 'Categories Assigments created'
 end
 puts 'Classrooms created'
 
-50.times do
+20.times do
   CourseSession.create!(
     date: Faker::Date.in_date_period,
     classroom_id: Classroom.all.sample.id,
@@ -52,18 +52,17 @@ end
 puts 'Sessions created'
 
 CourseSession.all.each do |item|
-  students = User.students
-  used_students = []
+  used_students_ids = []
   rand(20).times do
-    student = students.sample
-    next if used_students.include?(student) do
-              SessionAttendee.create!(
-                assessment: rand(20),
-                student_id: student.id,
-                course_session_id: item.id
-              )
-              used_students << student
-            end
+    student = User.students.sample
+    student = User.students.sample while used_students_ids.include?(student.id)
+
+    SessionAttendee.create!(
+      assessment: rand(20),
+      student_id: student.id,
+      course_session_id: item.id
+    )
+    used_students_ids << student.id
   end
 end
 puts 'Session attendees created'
