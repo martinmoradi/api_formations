@@ -52,13 +52,18 @@ end
 puts 'Sessions created'
 
 CourseSession.all.each do |item|
-  attendees_number = rand(20)
-  attendees_number.times do
-    SessionAttendee.create!(
-      assessment: rand(20),
-      student_id: User.students.sample.id,
-      course_session_id: item.id
-    )
+  students = User.students
+  used_students = []
+  rand(20).times do
+    student = students.sample
+    next if used_students.include?(student) do
+              SessionAttendee.create!(
+                assessment: rand(20),
+                student_id: student.id,
+                course_session_id: item.id
+              )
+              used_students << student
+            end
   end
 end
 puts 'Session attendees created'

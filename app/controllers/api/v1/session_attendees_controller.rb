@@ -1,9 +1,10 @@
-  class Api::Admins::SessionAttendeesController < Api::Admins::AdminsController
+  class Api::V1::SessionAttendeesController < Api::BaseController
     before_action :set_session_attendee, only: %i[show update destroy]
+    before_action :authenticate_user!, except: %i[index]
 
     def index
       @session_attendees = SessionAttendee.all
-      render json: @session_attendees
+      render json: CourseSessionSerializer.new(@session_attendees)
     end
 
     def show
@@ -13,7 +14,7 @@
     def create
       @session_attendee = SessionAttendees.new(session_attendee_params)
       if @session_attendee.save
-        render json: @session_attendee, status: :created, location: @session_attendee
+        render json: @session_attendee, status: :created, api_v1_session_attendees_url(@session_attendee)
       else
         render json: @session_attendee.errors, status: :unprocessable_entity
       end

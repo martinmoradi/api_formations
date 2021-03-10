@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 2021_03_08_145812) do
 
   create_table "course_sessions", force: :cascade do |t|
     t.date "date", null: false
+    t.integer "remaining_seats", default: 20, null: false
     t.bigint "classroom_id", null: false
     t.bigint "course_id", null: false
     t.datetime "created_at", precision: 6, null: false

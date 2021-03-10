@@ -1,5 +1,7 @@
-class Api::Admins::ClassroomsController < Api::Admins::AdminsController
+class Api::V1::ClassroomsController < Api::BaseController
   before_action :set_classroom, only: %i[show update destroy]
+  before_action :authenticate_user!
+  before_action :admin?, only: %i[create update destroy]
 
   def index
     @classrooms = Classroom.all
@@ -13,7 +15,7 @@ class Api::Admins::ClassroomsController < Api::Admins::AdminsController
   def create
     @classroom = Classroom.new(classroom_params)
     if @classroom.save
-      render json: @classroom, status: :created
+      render json: @classroom, status: :created, location: api_v1_classrooms_url(@classroom)
     else
       render json: @classroom.errors, status: :unprocessable_entity
     end
