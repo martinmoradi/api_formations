@@ -2,8 +2,8 @@
 #   t.bigint "student_id", null: false
 #   t.bigint "course_session_id", null: false
 class SessionAttendee < ApplicationRecord
-  belongs_to :student, class_name: 'User', foreign_key: 'student_id'
-  belongs_to :course_session
+  belongs_to :student, class_name: 'User', foreign_key: 'student_id', dependent: :nullify
+  belongs_to :course_session, dependent: :nullify
   # , :already_registered?
   before_create :remaining_seats?, :already_registered?
   after_create :register_to_session
