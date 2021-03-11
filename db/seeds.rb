@@ -14,7 +14,7 @@ end
 puts 'Valid users successfully created '
 
 # Users to validate
-5.times do
+15.times do
   User.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
