@@ -12,8 +12,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
-  
-  has_many :session_attendees, dependant: :destroy
+  has_many :session_attendees, dependant: :nullify
   has_many :course_sessions, through: :session_attendees, dependent: :nullify
 
   validates :email,
