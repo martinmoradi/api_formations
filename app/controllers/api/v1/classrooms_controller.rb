@@ -22,7 +22,7 @@ class Api::V1::ClassroomsController < Api::BaseController
   end
 
   def destroy
-    @classroom.destroy
+    @classroom.delete
   end
 
   private

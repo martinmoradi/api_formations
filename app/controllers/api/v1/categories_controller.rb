@@ -29,7 +29,7 @@ class Api::V1::CategoriesController < Api::BaseController
   end
 
   def destroy
-    @category.destroy
+    @category.delete
   end
 
   private

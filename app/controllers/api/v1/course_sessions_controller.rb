@@ -30,7 +30,7 @@ class Api::V1::CourseSessionsController < Api::BaseController
   end
 
   def destroy
-    @course_session.destroy
+    @course_session.delete
   end
 
   private
