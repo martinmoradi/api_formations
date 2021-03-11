@@ -3,6 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/users_validation', to: 'users#to_validate'
       resources :classrooms
+      resources :users
       resources :categories
       resources :courses do
         resources :course_sessions do
