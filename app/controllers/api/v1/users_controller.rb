@@ -26,7 +26,7 @@ class Api::V1::UsersController < Api::BaseController
   end
 
   def destroy
-    @user.destroy
+    @user.delete
   end
 
   private
