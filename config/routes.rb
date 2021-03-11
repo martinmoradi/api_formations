@@ -7,10 +7,8 @@ Rails.application.routes.draw do
       resources :categories
       resources :course_sessions do
         resources :session_attendees
-         end
-      resources :courses 
-       
       end
+      resources :courses
     end
   end
 
