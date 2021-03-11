@@ -5,10 +5,11 @@ Rails.application.routes.draw do
       resources :classrooms
       resources :users
       resources :categories
-      resources :courses do
-        resources :course_sessions do
-          resources :session_attendees
-        end
+      resources :course_sessions do
+        resources :session_attendees
+         end
+      resources :courses 
+       
       end
     end
   end
