@@ -36,6 +36,6 @@ class Api::V1::UsersController < Api::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:is_validated, :role)
+    params.require(:user).permit(:is_validated, :role, :id)
   end
 end
