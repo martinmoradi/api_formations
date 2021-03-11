@@ -12,11 +12,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :jwt_authenticatable, jwt_revocation_strategy: self
 
-  # has_many :session_attendees, class_name: 'student', foreign_key: 'student_id', dependent: :nullify
-  # has_many :sessions, through: :session_attendees, foreign_key: 'student_id', dependent: :nullify
-  # has_many :courses, class_name: 'teacher', foreign_key: 'teacher_id', dependent: :nullify
-  has_many :session_attendees
-  has_many :course_sessions, through: :session_attendees
+  
+  has_many :session_attendees, dependant: :destroy
+  has_many :course_sessions, through: :session_attendees, dependent: :nullify
 
   validates :email,
             presence: true,
